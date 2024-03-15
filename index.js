@@ -34,11 +34,11 @@ app.get("/i/:id", async (req, res) => {
     },
     create: {
       id,
-      count: 1,
+      count: BigInt(1),
     },
     update: {
       count: {
-        increment: 1,
+        increment: BigInt(1),
       },
     },
   });
