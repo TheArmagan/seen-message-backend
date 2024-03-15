@@ -4,8 +4,6 @@ const app = express();
 
 const { PrismaClient } = require('@prisma/client');
 
-app.use(express.static('static'));
-
 // i am too lazy to create separate file for this
 const prisma = new PrismaClient()
 
@@ -22,6 +20,8 @@ app.get("*", (req, res, next) => {
   res.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
+
+app.use(express.static('static'));
 
 app.get("/i/:id", async (req, res) => {
   const userAgent = req.headers['user-agent'];
