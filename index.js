@@ -55,6 +55,8 @@ app.get("/a/:id", async (req, res) => {
     }
   });
 
+  if (!j) return res.send("0");
+
   res.send(j.count.toString());
 });
 
