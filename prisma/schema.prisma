@@ -14,8 +14,8 @@ datasource db {
 }
 
 model SeenItem {
-  id         String    @id @unique @db.VarChar(32)
-  created_at DateTime  @default(now())
-  first_seen DateTime? @default(now())
-  last_seen  DateTime? @default(now())
+  id            String    @id @unique @db.VarChar(32)
+  created_at    DateTime  @default(now())
+  first_seen_at DateTime? @default(now())
+  last_seen_at  DateTime? @default(now())
 }

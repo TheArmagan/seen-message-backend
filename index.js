@@ -54,11 +54,11 @@ app.get("/i/:id", async (req, res) => {
     },
     create: {
       id,
-      first_seen: new Date(),
-      last_seen: new Date(),
+      first_seen_at: new Date(),
+      last_seen_at: new Date(),
     },
     update: {
-      last_seen: new Date(),
+      last_seen_at: new Date(),
     },
   });
 
