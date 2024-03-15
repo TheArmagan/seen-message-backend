@@ -22,6 +22,7 @@ app.get("*", (req, res, next) => {
 });
 
 app.use(express.static('static'));
+app.use(express.json());
 
 app.get("/i/:id", async (req, res) => {
   const userAgent = req.headers['user-agent'];
@@ -53,19 +54,18 @@ app.get("/i/:id", async (req, res) => {
     },
     create: {
       id,
-      count: BigInt(1),
+      first_seen: new Date(),
+      last_seen: new Date(),
     },
     update: {
-      count: {
-        increment: BigInt(1),
-      },
+      last_seen: new Date(),
     },
   });
 
-  console.log(new Date().toLocaleString(), "User.", req.url, j.count, userAgent);
+  console.log(new Date().toLocaleString(), "User.", req.url, j, userAgent);
 });
 
-app.get("/a/:id", async (req, res) => {
+app.get("/d/:id", async (req, res) => {
   const id = req.params.id.slice(0, 32);
 
   const j = await prisma.seenItem.findUnique({
@@ -74,9 +74,16 @@ app.get("/a/:id", async (req, res) => {
     }
   });
 
-  if (!j) return res.send("0");
+  if (!j) {
+    return res.send({
+      ok: false
+    })
+  }
 
-  res.send(j.count.toString());
+  res.send({
+    ok: true,
+    data: j
+  });
 });
 
 app.listen(process.env.PORT || 8871, () => {
