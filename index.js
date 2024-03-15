@@ -9,6 +9,20 @@ app.use(express.static('static'));
 // i am too lazy to create separate file for this
 const prisma = new PrismaClient()
 
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "https://discord.com");
+  res.header("Access-Control-Allow-Methods", "GET");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.status(200).send();
+});
+
+app.get("*", (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://discord.com");
+  res.header("Access-Control-Allow-Methods", "GET");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+
 app.get("/i/:id", async (req, res) => {
   const userAgent = req.headers['user-agent'];
 
