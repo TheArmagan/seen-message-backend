@@ -24,7 +24,7 @@ app.get("/i/:id", async (req, res) => {
     return res.redirect("/none.png");
   }
 
-  res.redirect("/none.png");
+  res.sendFile(__dirname + "/static/none.png");
 
   const id = req.params.id.slice(0, 32);
 
