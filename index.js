@@ -11,6 +11,7 @@ app.options("*", (req, res) => {
   res.header("Access-Control-Allow-Origin", "https://discord.com");
   res.header("Access-Control-Allow-Methods", "GET");
   res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Cache-Control", "public, max-age=0");
   res.status(200).send();
 });
 
@@ -18,6 +19,7 @@ app.get("*", (req, res, next) => {
   res.header("Access-Control-Allow-Origin", "https://discord.com");
   res.header("Access-Control-Allow-Methods", "GET");
   res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Cache-Control", "public, max-age=0");
   next();
 });
 
