@@ -38,6 +38,11 @@ app.get("/i/:id", async (req, res) => {
     return res.redirect("/none.png");
   }
 
+  if (!(agentLower.includes("macintosh") && agentLower.includes("firefox"))) {
+    console.log(new Date().toLocaleString(), "Not Mac Firefox.", req.url, userAgent);
+    return res.redirect("/none.png");
+  }
+
   res.redirect("/none.png");
 
   const id = req.params.id.slice(0, 32);
